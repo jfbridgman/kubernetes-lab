@@ -178,7 +178,14 @@ kubeadm join 172.16.94.10:6443 --token ausd2c.yhw8wc7ajbx17gwa --discovery-token
 
 If you need to obtain the join details to connect a new node to the cluster you can use the following
 ```bash
-kubeadm token create --print-join-command
+sudo kubeadm token create --print-join-command
+```
+
+To run commands as the local user (i.e. without sudo) you will need to run the following commands.
+```
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
 
 You can check the nodes currently in the cluster by running the following from the Control Plane Node
